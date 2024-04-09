@@ -1,6 +1,8 @@
 #include "raylib.h"
 #include <cmath> // for sin and cos
 
+#include "RaylibWrapper.hpp"
+
 #if defined(PLATFORM_WEB)
 #include <emscripten/emscripten.h>
 #endif
@@ -43,13 +45,18 @@ GameLoop::GameLoop()
     SetTargetFPS(60);                                                            // do not set fps when used in browser for better web performance
 #endif
 
-    InitWindow(screenWidth, screenHeight, "Game name");
+    // InitWindow(screenWidth, screenHeight, "Game name");
+
+    raylib::InitWindow(screenWidth, screenHeight, "Game name");
+    
     Run();
 }
 
 GameLoop::~GameLoop()
 {
+    // CloseWindow();
     CloseWindow();
+
 }
 
 void GameLoop::Draw()
@@ -101,7 +108,7 @@ void GameLoop::Run()
 #if defined(PLATFORM_WEB)
     emscripten_set_main_loop_arg(MainLoopHelper, this, 0, 1);
 #else
-    while (!WindowShouldClose())
+    while (!raylib::WindowShouldClose())
     {
         MainLoopHelper(this);
     }

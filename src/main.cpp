@@ -1,7 +1,6 @@
-#include "raylib.h"
-#include <cmath> // for sin and cos
-
 #include "RaylibWrapper.hpp"
+
+#include <cmath> // for sin and cos
 
 #if defined(PLATFORM_WEB)
 #include <emscripten/emscripten.h>
@@ -17,6 +16,9 @@ EM_JS(int, getBrowserHeight, (), {
     return window.innerHeight;
 });
 #endif
+
+// using namespace rlw;
+
 
 // class used to set up game loop
 class GameLoop
@@ -41,13 +43,13 @@ GameLoop::GameLoop()
 #if defined(PLATFORM_WEB)
     SetConfigFlags(FLAG_MSAA_4X_HINT | FLAG_VSYNC_HINT);
 #else
-    SetConfigFlags(FLAG_MSAA_4X_HINT | FLAG_VSYNC_HINT | FLAG_WINDOW_RESIZABLE); // set custom flags for desktop
-    SetTargetFPS(60);                                                            // do not set fps when used in browser for better web performance
+    rlw::SetConfigFlags(rlw::FLAG_MSAA_4X_HINT | rlw::FLAG_VSYNC_HINT | rlw::FLAG_WINDOW_RESIZABLE); // set custom flags for desktop
+    rlw::SetTargetFPS(60);                                                            // do not set fps when used in browser for better web performance
 #endif
 
     // InitWindow(screenWidth, screenHeight, "Game name");
 
-    raylib::InitWindow(screenWidth, screenHeight, "Game name");
+    rlw::InitWindow(screenWidth, screenHeight, "Game name");
     
     Run();
 }
@@ -55,7 +57,7 @@ GameLoop::GameLoop()
 GameLoop::~GameLoop()
 {
     // CloseWindow();
-    CloseWindow();
+    rlw::CloseWindow();
 
 }
 
@@ -67,18 +69,18 @@ void GameLoop::Draw()
     SetWindowSize(getBrowserWidth() - padding, getBrowserHeight() - padding);
 #endif
 
-    BeginDrawing();
-    ClearBackground(DARKGRAY);
+    rlw::BeginDrawing();
+    rlw::ClearBackground(BLUE);
 
     // rainbow triangle 
     {
         static unsigned char rainbowNum{0};
 
-        DrawTriangle(
-            Vector2{static_cast<float>(screenWidth / 2), static_cast<float>(screenHeight / 2 - 100)},
-            Vector2{static_cast<float>(screenWidth / 2 - 100), static_cast<float>(screenHeight / 2 + 100)},
-            Vector2{static_cast<float>(screenWidth / 2 + 100), static_cast<float>(screenHeight / 2 + 100)},
-            Color{
+        rlw::DrawTriangle(
+            rlw::Vector2{static_cast<float>(screenWidth / 2), static_cast<float>(screenHeight / 2 - 100)},
+            rlw::Vector2{static_cast<float>(screenWidth / 2 - 100), static_cast<float>(screenHeight / 2 + 100)},
+            rlw::Vector2{static_cast<float>(screenWidth / 2 + 100), static_cast<float>(screenHeight / 2 + 100)},
+            rlw::Color{
                 static_cast<unsigned char>((1 + sin(0.3 * rainbowNum)) * 127.5),
                 static_cast<unsigned char>((1 + sin(0.3 * rainbowNum + 2)) * 127.5),
                 static_cast<unsigned char>((1 + sin(0.3 * rainbowNum + 4)) * 127.5),
@@ -91,7 +93,9 @@ void GameLoop::Draw()
         }
     }
 
-    EndDrawing();
+    rlw::DrawFPS(10, 10);
+
+    rlw::EndDrawing();
 }
 
 // method used to call all game logic
@@ -108,7 +112,7 @@ void GameLoop::Run()
 #if defined(PLATFORM_WEB)
     emscripten_set_main_loop_arg(MainLoopHelper, this, 0, 1);
 #else
-    while (!raylib::WindowShouldClose())
+    while (!rlw::WindowShouldClose())
     {
         MainLoopHelper(this);
     }

@@ -1,7 +1,7 @@
+// taken from https://www.raylib.com/cheatsheet/cheatsheet.html and modified into a namespace
+
 #ifndef RAYLIB_WRAPPER_H
 #define RAYLIB_WRAPPER_H
-
-// #include "raylib.h"
 
 #include <stdarg.h>
 

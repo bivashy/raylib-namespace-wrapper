@@ -1,8 +1,5 @@
 #include "RaylibWrapper.hpp"
-
 #include "raylib.h"
-
-#include <vector>
 
 namespace rlw
 {
@@ -99,16 +96,12 @@ namespace rlw
 
     void SetWindowIcon(Image image)
     {
-        // ::SetWindowIcon(image); // Set icon for window (single image, RGBA 32bit, only PLATFORM_DESKTOP)
         ::SetWindowIcon(reinterpret_cast<::Image &>(image)); // Set icon for window (single image, RGBA 32bit, only PLATFORM_DESKTOP)
     }
 
     void SetWindowIcons(Image *images, int count)
     {
-        // ::SetWindowIcons(images, count); // Pass the array of Image objects
         ::SetWindowIcons(reinterpret_cast<::Image *>(images), count); // Pass the array of Image objects
-
-        // ::SetWindowIcon(reinterpret_cast<::Image &>(image)); // Set icon for window (single image, RGBA 32bit, only PLATFORM_DESKTOP)
     }
 
     void SetWindowTitle(const char *title)
@@ -288,16 +281,7 @@ namespace rlw
     // Drawing-related functions
     void ClearBackground(Color color)
     {
-        // Color temp = ::LoadVrStereoConfig(device);
-        // return reinterpret_cast<VrStereoConfig &>(temp);
-
-        // Color temp = reinterpret_cast<Color &>(color);
-
         ::ClearBackground(reinterpret_cast<::Color &>(color)); // Set background color (framebuffer clear color)
-
-        // ::ClearBackground(temp); // Set background color (framebuffer clear color)
-
-        // ::ClearBackground(color); // Set background color (framebuffer clear color)
     }
 
     void BeginDrawing()
@@ -312,8 +296,6 @@ namespace rlw
 
     void BeginMode2D(Camera2D camera)
     {
-
-        // ::BeginMode2D(camera); // Begin 2D mode with custom camera (2D)
         ::BeginMode2D(reinterpret_cast<::Camera2D &>(camera)); // Begin 2D mode with custom camera (2D)
     }
 
@@ -324,7 +306,6 @@ namespace rlw
 
     void BeginMode3D(Camera3D camera)
     {
-        // ::BeginMode3D(camera); // Begin 3D mode with custom camera (3D)
         ::BeginMode3D(reinterpret_cast<::Camera3D &>(camera)); // Begin 3D mode with custom camera (3D)
     }
 
@@ -336,7 +317,6 @@ namespace rlw
     void BeginTextureMode(RenderTexture2D target)
     {
         ::BeginTextureMode(reinterpret_cast<::RenderTexture2D &>(target)); // Begin drawing to render texture
-        // ::BeginTextureMode(target); // Begin drawing to render texture
     }
 
     void EndTextureMode()
@@ -346,7 +326,6 @@ namespace rlw
 
     void BeginShaderMode(Shader shader)
     {
-        // ::BeginShaderMode(shader); // Begin custom shader drawing
         ::BeginShaderMode(reinterpret_cast<::Shader &>(shader)); // Begin custom shader drawing
     }
 
@@ -377,7 +356,6 @@ namespace rlw
 
     void BeginVrStereoMode(VrStereoConfig config)
     {
-        // ::BeginVrStereoMode(config); // Begin stereo rendering (requires VR simulator)
         ::BeginVrStereoMode(reinterpret_cast<::VrStereoConfig &>(config)); // Begin stereo rendering (requires VR simulator)
     }
 
@@ -391,13 +369,10 @@ namespace rlw
     {
         ::VrStereoConfig temp = ::LoadVrStereoConfig(reinterpret_cast<::VrDeviceInfo &>(device));
         return reinterpret_cast<VrStereoConfig &>(temp);
-
-        // return ::LoadVrStereoConfig(device); // Load VR stereo config for VR simulator device parameters
     }
 
     void UnloadVrStereoConfig(VrStereoConfig config)
     {
-        // ::UnloadVrStereoConfig(config); // Unload VR stereo config
         ::UnloadVrStereoConfig(reinterpret_cast<::VrStereoConfig &>(config)); // Unload VR stereo config
     }
 
@@ -408,64 +383,52 @@ namespace rlw
     {
         ::Shader temp = ::LoadShader(vsFileName, fsFileName);
         return reinterpret_cast<Shader &>(temp);
-
-        // return reinterpret_cast<Shader&>( ::LoadShader(vsFileName, fsFileName) ); // Load shader from files and bind default locations
     }
 
     Shader LoadShaderFromMemory(const char *vsCode, const char *fsCode)
     {
         ::Shader temp = ::LoadShaderFromMemory(vsCode, fsCode);
         return reinterpret_cast<Shader &>(temp);
-
-        // return reinterpret_cast<Shader &>(::LoadShaderFromMemory(vsCode, fsCode)); // Load shader from code strings and bind default locations
     }
 
     bool IsShaderReady(Shader shader)
     {
-        // return ::IsShaderReady(shader); // Check if a shader is ready
         return ::IsShaderReady(reinterpret_cast<::Shader &>(shader)); // Check if a shader is ready
     }
 
     int GetShaderLocation(Shader shader, const char *uniformName)
     {
-        // return ::GetShaderLocation(shader, uniformName); // Get shader uniform location
         return ::GetShaderLocation(reinterpret_cast<::Shader &>(shader), uniformName); // Get shader uniform location
     }
 
     int GetShaderLocationAttrib(Shader shader, const char *attribName)
     {
-        // return ::GetShaderLocationAttrib(shader, attribName); // Get shader attribute location
         return ::GetShaderLocationAttrib(reinterpret_cast<::Shader &>(shader), attribName); // Get shader attribute location
     }
 
     void SetShaderValue(Shader shader, int locIndex, const void *value, int uniformType)
     {
-        // ::SetShaderValue(shader, locIndex, value, uniformType); // Set shader uniform value
         ::SetShaderValue(reinterpret_cast<::Shader &>(shader), locIndex, value, uniformType); // Set shader uniform value
     }
 
     void SetShaderValueV(Shader shader, int locIndex, const void *value, int uniformType, int count)
     {
         ::SetShaderValueV(reinterpret_cast<::Shader &>(shader), locIndex, value, uniformType, count); // Set shader uniform value vector
-        // ::SetShaderValueV(shader, locIndex, value, uniformType, count); // Set shader uniform value vector
     }
 
     void SetShaderValueMatrix(Shader shader, int locIndex, Matrix mat)
     {
         ::SetShaderValueMatrix(reinterpret_cast<::Shader &>(shader), locIndex, reinterpret_cast<::Matrix &>(mat)); // Set shader uniform value (matrix 4x4)
-        // ::SetShaderValueMatrix(shader, locIndex, mat); // Set shader uniform value (matrix 4x4)
     }
 
     void SetShaderValueTexture(Shader shader, int locIndex, Texture2D texture)
     {
         ::SetShaderValueTexture(reinterpret_cast<::Shader &>(shader), locIndex, reinterpret_cast<::Texture2D &>(texture)); // Set shader uniform value for texture (sampler2d)
-        // ::SetShaderValueTexture(shader, locIndex, texture); // Set shader uniform value for texture (sampler2d)
     }
 
     void UnloadShader(Shader shader)
     {
         ::UnloadShader(reinterpret_cast<::Shader &>(shader)); // Unload shader from GPU memory (VRAM)
-        // ::UnloadShader(shader); // Unload shader from GPU memory (VRAM)
     }
 
     // Screen-space-related functions
@@ -473,56 +436,42 @@ namespace rlw
     {
         ::Ray temp = ::GetMouseRay(reinterpret_cast<::Vector2 &>(mousePosition), reinterpret_cast<::Camera &>(camera));
         return reinterpret_cast<Ray &>(temp);
-
-        // return ::GetMouseRay(mousePosition, camera); // Get a ray trace from mouse position
     }
 
     Matrix GetCameraMatrix(Camera camera)
     {
         ::Matrix temp = ::GetCameraMatrix(reinterpret_cast<::Camera &>(camera));
         return reinterpret_cast<Matrix &>(temp);
-
-        // return ::GetCameraMatrix(camera); // Get camera transform matrix (view matrix)
     }
 
     Matrix GetCameraMatrix2D(Camera2D camera)
     {
         ::Matrix temp = ::GetCameraMatrix2D(reinterpret_cast<::Camera2D &>(camera));
         return reinterpret_cast<Matrix &>(temp);
-
-        // return ::GetCameraMatrix2D(camera); // Get camera 2d transform matrix
     }
 
     Vector2 GetWorldToScreen(Vector3 position, Camera camera)
     {
         ::Vector2 temp = ::GetWorldToScreen(reinterpret_cast<::Vector3 &>(position), reinterpret_cast<::Camera &>(camera));
         return reinterpret_cast<Vector2 &>(temp);
-
-        // return ::GetWorldToScreen(position, camera); // Get the screen space position for a 3d world space position
     }
 
     Vector2 GetScreenToWorld2D(Vector2 position, Camera2D camera)
     {
         ::Vector2 temp = ::GetScreenToWorld2D(reinterpret_cast<::Vector2 &>(position), reinterpret_cast<::Camera2D &>(camera));
         return reinterpret_cast<Vector2 &>(temp);
-
-        // return ::GetScreenToWorld2D(position, camera); // Get the world space position for a 2d camera screen space position
     }
 
     Vector2 GetWorldToScreenEx(Vector3 position, Camera camera, int width, int height)
     {
         ::Vector2 temp = ::GetWorldToScreenEx(reinterpret_cast<::Vector3 &>(position), reinterpret_cast<::Camera &>(camera), width, height);
         return reinterpret_cast<Vector2 &>(temp);
-
-        // return ::GetWorldToScreenEx(position, camera, width, height); // Get size position for a 3d world space position
     }
 
     Vector2 GetWorldToScreen2D(Vector2 position, Camera2D camera)
     {
         ::Vector2 temp = ::GetWorldToScreen2D(reinterpret_cast<::Vector2 &>(position), reinterpret_cast<::Camera2D &>(camera));
         return reinterpret_cast<Vector2 &>(temp);
-
-        // return ::GetWorldToScreen2D(position, camera); // Get the screen space position for a 2d camera world space position
     }
 
     void SetTargetFPS(int fps)
@@ -630,31 +579,26 @@ namespace rlw
     void SetTraceLogCallback(TraceLogCallback callback)
     {
         ::SetTraceLogCallback(reinterpret_cast<::TraceLogCallback &>(callback)); // Set custom trace log
-        // ::SetTraceLogCallback(callback); // Set custom trace log
     }
 
     void SetLoadFileDataCallback(LoadFileDataCallback callback)
     {
         ::SetLoadFileDataCallback(reinterpret_cast<::LoadFileDataCallback &>(callback)); // Set custom file binary data loader
-        // ::SetLoadFileDataCallback(callback); // Set custom file binary data loader
     }
 
     void SetSaveFileDataCallback(SaveFileDataCallback callback)
     {
         ::SetSaveFileDataCallback(reinterpret_cast<::SaveFileDataCallback &>(callback)); // Set custom file binary data saver
-        // ::SetSaveFileDataCallback(callback); // Set custom file binary data saver
     }
 
     void SetLoadFileTextCallback(LoadFileTextCallback callback)
     {
         ::SetLoadFileTextCallback(reinterpret_cast<::LoadFileTextCallback &>(callback)); // Set custom file text data loader
-        // ::SetLoadFileTextCallback(callback); // Set custom file text data loader
     }
 
     void SetSaveFileTextCallback(SaveFileTextCallback callback)
     {
         ::SetSaveFileTextCallback(reinterpret_cast<::SaveFileTextCallback &>(callback)); // Set custom file text data saver
-        // ::SetSaveFileTextCallback(callback); // Set custom file text data saver
     }
 
     unsigned char *LoadFileData(const char *fileName, int *dataSize)
@@ -761,21 +705,16 @@ namespace rlw
     {
         ::FilePathList temp = ::LoadDirectoryFiles(dirPath);
         return reinterpret_cast<FilePathList &>(temp);
-
-        // return ::LoadDirectoryFiles(dirPath); // Load directory filepaths
     }
 
     FilePathList LoadDirectoryFilesEx(const char *basePath, const char *filter, bool scanSubdirs)
     {
         ::FilePathList temp = ::LoadDirectoryFilesEx(basePath, filter, scanSubdirs);
         return reinterpret_cast<FilePathList &>(temp);
-
-        // return ::LoadDirectoryFilesEx(basePath, filter, scanSubdirs); // Load directory filepaths with extension filtering and recursive directory scan
     }
 
     void UnloadDirectoryFiles(FilePathList files)
     {
-        // ::UnloadDirectoryFiles(files); // Unload filepaths
         ::UnloadDirectoryFiles(reinterpret_cast<::FilePathList &>(files)); // Unload filepaths
     }
 
@@ -788,14 +727,11 @@ namespace rlw
     {
         ::FilePathList temp = ::LoadDroppedFiles();
         return reinterpret_cast<FilePathList &>(temp);
-
-        // return ::LoadDroppedFiles(); // Load dropped filepaths
     }
 
     void UnloadDroppedFiles(FilePathList files)
     {
         ::UnloadDroppedFiles(reinterpret_cast<::FilePathList &>(files)); // Unload dropped filepaths
-        // ::UnloadDroppedFiles(files); // Unload dropped filepaths
     }
 
     long GetFileModTime(const char *fileName)
@@ -827,26 +763,21 @@ namespace rlw
     {
         ::AutomationEventList temp = ::LoadAutomationEventList(fileName);
         return reinterpret_cast<AutomationEventList &>(temp);
-
-        // return ::LoadAutomationEventList(fileName); // Load automation events list from file, NULL for empty list, capacity = MAX_AUTOMATION_EVENTS
     }
 
     void UnloadAutomationEventList(AutomationEventList *list)
     {
-        // ::UnloadAutomationEventList(*list); // Unload automation events list from file
         ::UnloadAutomationEventList(reinterpret_cast<::AutomationEventList &>(*list)); // Unload automation events list from file
     }
 
     bool ExportAutomationEventList(AutomationEventList list, const char *fileName)
     {
-        // return ::ExportAutomationEventList(list, fileName); // Export automation events list as text file
         return ::ExportAutomationEventList(reinterpret_cast<::AutomationEventList &>(list), fileName); // Export automation events list as text file
     }
 
     void SetAutomationEventList(AutomationEventList *list)
     {
         ::SetAutomationEventList(reinterpret_cast<::AutomationEventList *>(list)); // Set automation event list to record to
-        // ::SetAutomationEventList(list); // Set automation event list to record to
     }
 
     void SetAutomationEventBaseFrame(int frame)
@@ -1001,16 +932,12 @@ namespace rlw
     {
         ::Vector2 temp = ::GetMousePosition();
         return reinterpret_cast<Vector2 &>(temp);
-
-        // return ::GetMousePosition(); // Get mouse position XY
     }
 
     Vector2 GetMouseDelta(void)
     {
         ::Vector2 temp = ::GetMouseDelta();
         return reinterpret_cast<Vector2 &>(temp);
-
-        // return ::GetMouseDelta(); // Get mouse delta between frames
     }
 
     void SetMousePosition(int x, int y)
@@ -1037,8 +964,6 @@ namespace rlw
     {
         ::Vector2 temp = ::GetMouseWheelMoveV();
         return reinterpret_cast<Vector2 &>(temp);
-
-        // return ::GetMouseWheelMoveV(); // Get mouse wheel movement for both X and Y
     }
 
     void SetMouseCursor(int cursor)
@@ -1103,8 +1028,6 @@ namespace rlw
     {
         ::Vector2 temp = ::GetGestureDragVector();
         return reinterpret_cast<Vector2 &>(temp);
-
-        // return ::GetGestureDragVector(); // Get gesture drag vector
     }
 
     float GetGestureDragAngle(void)
@@ -1114,11 +1037,8 @@ namespace rlw
 
     Vector2 GetGesturePinchVector(void)
     {
-
         ::Vector2 temp = ::GetGesturePinchVector();
         return reinterpret_cast<Vector2 &>(temp);
-
-        // return ::GetGesturePinchVector(); // Get gesture pinch delta
     }
 
     float GetGesturePinchAngle(void)
@@ -1133,13 +1053,11 @@ namespace rlw
     void UpdateCamera(Camera *camera, int mode)
     {
         ::UpdateCamera(reinterpret_cast<::Camera *>(camera), mode); // Update camera position for the selected mode
-        // ::UpdateCamera(camera, mode); // Update camera position for the selected mode
     }
 
     void UpdateCameraPro(Camera *camera, Vector3 movement, Vector3 rotation, float zoom)
     {
         ::UpdateCameraPro(reinterpret_cast<::Camera *>(camera), reinterpret_cast<::Vector3 &>(movement), reinterpret_cast<::Vector3 &>(rotation), zoom); // Update camera movement/rotation
-        // ::UpdateCameraPro(camera, movement, rotation, zoom); // Update camera movement/rotation
     }
 
     //------------------------------------------------------------------------------------rshapes------------------------------------------------------------------------------------
@@ -1147,385 +1065,317 @@ namespace rlw
     void SetShapesTexture(Texture2D texture, Rectangle source)
     {
         ::SetShapesTexture(reinterpret_cast<::Texture2D &>(texture), reinterpret_cast<::Rectangle &>(source)); // Set texture and rectangle to be used on shapes drawing
-        // ::SetShapesTexture(texture, source); // Set texture and rectangle to be used on shapes drawing
     }
 
     void DrawPixel(int posX, int posY, Color color)
     {
         ::DrawPixel(posX, posY, reinterpret_cast<::Color &>(color)); // Draw a pixel
-        // ::DrawPixel(posX, posY, color); // Draw a pixel
     }
 
     void DrawPixelV(Vector2 position, Color color)
     {
         ::DrawPixelV(reinterpret_cast<::Vector2 &>(position), reinterpret_cast<::Color &>(color)); // Draw a pixel (Vector version)
-        // ::DrawPixelV(position, color); // Draw a pixel (Vector version)
     }
 
     void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, Color color)
     {
         ::DrawLine(startPosX, startPosY, endPosX, endPosY, reinterpret_cast<::Color &>(color)); // Draw a line
-        // ::DrawLine(startPosX, startPosY, endPosX, endPosY, color); // Draw a line
     }
 
     void DrawLineV(Vector2 startPos, Vector2 endPos, Color color)
     {
         ::DrawLineV(reinterpret_cast<::Vector2 &>(startPos), reinterpret_cast<::Vector2 &>(endPos), reinterpret_cast<::Color &>(color)); // Draw a line (using gl lines)
-        // ::DrawLineV(startPos, endPos, color); // Draw a line (using gl lines)
     }
 
     void DrawLineEx(Vector2 startPos, Vector2 endPos, float thick, Color color)
     {
         ::DrawLineEx(reinterpret_cast<::Vector2 &>(startPos), reinterpret_cast<::Vector2 &>(endPos), thick, reinterpret_cast<::Color &>(color)); // Draw a line (using triangles/quads)
-        // ::DrawLineEx(startPos, endPos, thick, color); // Draw a line (using triangles/quads)
     }
 
     void DrawLineStrip(Vector2 *points, int pointCount, Color color)
     {
         ::DrawLineStrip(reinterpret_cast<::Vector2 *>(points), pointCount, reinterpret_cast<::Color &>(color)); // Draw lines sequence (using gl lines)
-        // ::DrawLineStrip(points, pointCount, color); // Draw lines sequence (using gl lines)
     }
 
     void DrawLineBezier(Vector2 startPos, Vector2 endPos, float thick, Color color)
     {
         ::DrawLineBezier(reinterpret_cast<::Vector2 &>(startPos), reinterpret_cast<::Vector2 &>(endPos), thick, reinterpret_cast<::Color &>(color)); // Draw line segment cubic-bezier in-out interpolation
-        // ::DrawLineBezier(startPos, endPos, thick, color); // Draw line segment cubic-bezier in-out interpolation
     }
 
     void DrawCircle(int centerX, int centerY, float radius, Color color)
     {
         ::DrawCircle(centerX, centerY, radius, reinterpret_cast<::Color &>(color)); // Draw a color-filled circle
-        // ::DrawCircle(centerX, centerY, radius, color); // Draw a color-filled circle
     }
 
     void DrawCircleSector(Vector2 center, float radius, float startAngle, float endAngle, int segments, Color color)
     {
         ::DrawCircleSector(reinterpret_cast<::Vector2 &>(center), radius, startAngle, endAngle, segments, reinterpret_cast<::Color &>(color)); // Draw a piece of a circle
-        // ::DrawCircleSector(center, radius, startAngle, endAngle, segments, color); // Draw a piece of a circle
     }
 
     void DrawCircleSectorLines(Vector2 center, float radius, float startAngle, float endAngle, int segments, Color color)
     {
         ::DrawCircleSectorLines(reinterpret_cast<::Vector2 &>(center), radius, startAngle, endAngle, segments, reinterpret_cast<::Color &>(color)); // Draw circle sector outline
-        // ::DrawCircleSectorLines(center, radius, startAngle, endAngle, segments, color); // Draw circle sector outline
     }
 
     void DrawCircleGradient(int centerX, int centerY, float radius, Color color1, Color color2)
     {
         ::DrawCircleGradient(centerX, centerY, radius, reinterpret_cast<::Color &>(color1), reinterpret_cast<::Color &>(color2)); // Draw a gradient-filled circle
-        // ::DrawCircleGradient(centerX, centerY, radius, color1, color2); // Draw a gradient-filled circle
     }
 
     void DrawCircleV(Vector2 center, float radius, Color color)
     {
         ::DrawCircleV(reinterpret_cast<::Vector2 &>(center), radius, reinterpret_cast<::Color &>(color)); // Draw a color-filled circle (Vector version)
-        // ::DrawCircleV(center, radius, color); // Draw a color-filled circle (Vector version)
     }
 
     void DrawCircleLines(int centerX, int centerY, float radius, Color color)
     {
         ::DrawCircleLines(centerX, centerY, radius, reinterpret_cast<::Color &>(color)); // Draw circle outline
-        // ::DrawCircleLines(centerX, centerY, radius, color); // Draw circle outline
     }
 
     void DrawCircleLinesV(Vector2 center, float radius, Color color)
     {
         ::DrawCircleLinesV(reinterpret_cast<::Vector2 &>(center), radius, reinterpret_cast<::Color &>(color)); // Draw circle outline (Vector version)
-        // ::DrawCircleLinesV(center, radius, color); // Draw circle outline (Vector version)
     }
 
     void DrawEllipse(int centerX, int centerY, float radiusH, float radiusV, Color color)
     {
         ::DrawEllipse(centerX, centerY, radiusH, radiusV, reinterpret_cast<::Color &>(color)); // Draw ellipse
-        // ::DrawEllipse(centerX, centerY, radiusH, radiusV, color); // Draw ellipse
     }
 
     void DrawEllipseLines(int centerX, int centerY, float radiusH, float radiusV, Color color)
     {
         ::DrawEllipseLines(centerX, centerY, radiusH, radiusV, reinterpret_cast<::Color &>(color)); // Draw ellipse outline
-        // ::DrawEllipseLines(centerX, centerY, radiusH, radiusV, color); // Draw ellipse outline
     }
 
     void DrawRing(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, Color color)
     {
         ::DrawRing(reinterpret_cast<::Vector2 &>(center), innerRadius, outerRadius, startAngle, endAngle, segments, reinterpret_cast<::Color &>(color)); // Draw ring
-        // ::DrawRing(center, innerRadius, outerRadius, startAngle, endAngle, segments, color); // Draw ring
     }
 
     void DrawRingLines(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, Color color)
     {
         ::DrawRingLines(reinterpret_cast<::Vector2 &>(center), innerRadius, outerRadius, startAngle, endAngle, segments, reinterpret_cast<::Color &>(color)); // Draw ring outline
-        // ::DrawRingLines(center, innerRadius, outerRadius, startAngle, endAngle, segments, color); // Draw ring outline
     }
 
     void DrawRectangle(int posX, int posY, int width, int height, Color color)
     {
         ::DrawRectangle(posX, posY, width, height, reinterpret_cast<::Color &>(color)); // Draw a color-filled rectangle
-        // ::DrawRectangle(posX, posY, width, height, color); // Draw a color-filled rectangle
     }
 
     void DrawRectangleV(Vector2 position, Vector2 size, Color color)
     {
         ::DrawRectangleV(reinterpret_cast<::Vector2 &>(position), reinterpret_cast<::Vector2 &>(size), reinterpret_cast<::Color &>(color)); // Draw a color-filled rectangle (Vector version)
-        // ::DrawRectangleV(position, size, color); // Draw a color-filled rectangle (Vector version)
     }
 
     void DrawRectangleRec(Rectangle rec, Color color)
     {
         ::DrawRectangleRec(reinterpret_cast<::Rectangle &>(rec), reinterpret_cast<::Color &>(color)); // Draw a color-filled rectangle
-        // ::DrawRectangleRec(rec, color); // Draw a color-filled rectangle
     }
 
     void DrawRectanglePro(Rectangle rec, Vector2 origin, float rotation, Color color)
     {
         ::DrawRectanglePro(reinterpret_cast<::Rectangle &>(rec), reinterpret_cast<::Vector2 &>(origin), rotation, reinterpret_cast<::Color &>(color)); // Draw a color-filled rectangle with pro parameters
-        // ::DrawRectanglePro(rec, origin, rotation, color); // Draw a color-filled rectangle with pro parameters
     }
 
     void DrawRectangleGradientV(int posX, int posY, int width, int height, Color color1, Color color2)
     {
         ::DrawRectangleGradientV(posX, posY, width, height, reinterpret_cast<::Color &>(color1), reinterpret_cast<::Color &>(color2)); // Draw a vertical-gradient-filled rectangle
-        // ::DrawRectangleGradientV(posX, posY, width, height, color1, color2); // Draw a vertical-gradient-filled rectangle
     }
 
     void DrawRectangleGradientH(int posX, int posY, int width, int height, Color color1, Color color2)
     {
         ::DrawRectangleGradientH(posX, posY, width, height, reinterpret_cast<::Color &>(color1), reinterpret_cast<::Color &>(color2)); // Draw a horizontal-gradient-filled rectangle
-        // ::DrawRectangleGradientH(posX, posY, width, height, color1, color2); // Draw a horizontal-gradient-filled rectangle
     }
 
     void DrawRectangleGradientEx(Rectangle rec, Color col1, Color col2, Color col3, Color col4)
     {
         ::DrawRectangleGradientEx(reinterpret_cast<::Rectangle &>(rec), reinterpret_cast<::Color &>(col1), reinterpret_cast<::Color &>(col2), reinterpret_cast<::Color &>(col3), reinterpret_cast<::Color &>(col4)); // Draw a gradient-filled rectangle with custom vertex colors
-        // ::DrawRectangleGradientEx(rec, col1, col2, col3, col4); // Draw a gradient-filled rectangle with custom vertex colors
     }
 
     void DrawRectangleLines(int posX, int posY, int width, int height, Color color)
     {
         ::DrawRectangleLines(posX, posY, width, height, reinterpret_cast<::Color &>(color)); // Draw rectangle outline
-        // ::DrawRectangleLines(posX, posY, width, height, color); // Draw rectangle outline
     }
 
     void DrawRectangleLinesEx(Rectangle rec, float lineThick, Color color)
     {
         ::DrawRectangleLinesEx(reinterpret_cast<::Rectangle &>(rec), lineThick, reinterpret_cast<::Color &>(color)); // Draw rectangle outline with extended parameters
-        // ::DrawRectangleLinesEx(rec, lineThick, color); // Draw rectangle outline with extended parameters
     }
 
     void DrawRectangleRounded(Rectangle rec, float roundness, int segments, Color color)
     {
         ::DrawRectangleRounded(reinterpret_cast<::Rectangle &>(rec), roundness, segments, reinterpret_cast<::Color &>(color)); // Draw rectangle with rounded edges
-        // ::DrawRectangleRounded(rec, roundness, segments, color); // Draw rectangle with rounded edges
     }
 
     void DrawRectangleRoundedLines(Rectangle rec, float roundness, int segments, float lineThick, Color color)
     {
         ::DrawRectangleRoundedLines(reinterpret_cast<::Rectangle &>(rec), roundness, segments, lineThick, reinterpret_cast<::Color &>(color)); // Draw rectangle with rounded edges outline
-        // ::DrawRectangleRoundedLines(rec, roundness, segments, lineThick, color); // Draw rectangle with rounded edges outline
     }
 
     void DrawTriangle(Vector2 v1, Vector2 v2, Vector2 v3, Color color)
     {
         ::DrawTriangle(reinterpret_cast<::Vector2 &>(v1), reinterpret_cast<::Vector2 &>(v2), reinterpret_cast<::Vector2 &>(v3), reinterpret_cast<::Color &>(color)); // Draw a color-filled triangle (vertex in counter-clockwise order!)
-        // ::DrawTriangle(v1, v2, v3, color); // Draw a color-filled triangle (vertex in counter-clockwise order!)
     }
 
     void DrawTriangleLines(Vector2 v1, Vector2 v2, Vector2 v3, Color color)
     {
         ::DrawTriangleLines(reinterpret_cast<::Vector2 &>(v1), reinterpret_cast<::Vector2 &>(v2), reinterpret_cast<::Vector2 &>(v3), reinterpret_cast<::Color &>(color)); // Draw triangle outline (vertex in counter-clockwise order!)
-        // ::DrawTriangleLines(v1, v2, v3, color); // Draw triangle outline (vertex in counter-clockwise order!)
     }
 
     void DrawTriangleFan(Vector2 *points, int pointCount, Color color)
     {
         ::DrawTriangleFan(reinterpret_cast<::Vector2 *>(points), pointCount, reinterpret_cast<::Color &>(color)); // Draw a triangle fan defined by points (first vertex is the center)
-        // ::DrawTriangleFan(points, pointCount, color); // Draw a triangle fan defined by points (first vertex is the center)
     }
 
     void DrawTriangleStrip(Vector2 *points, int pointCount, Color color)
     {
         ::DrawTriangleStrip(reinterpret_cast<::Vector2 *>(points), pointCount, reinterpret_cast<::Color &>(color)); // Draw a triangle strip defined by points
-        // ::DrawTriangleStrip(points, pointCount, color); // Draw a triangle strip defined by points
     }
 
     void DrawPoly(Vector2 center, int sides, float radius, float rotation, Color color)
     {
         ::DrawPoly(reinterpret_cast<::Vector2 &>(center), sides, radius, rotation, reinterpret_cast<::Color &>(color)); // Draw a regular polygon (Vector version)
-        // ::DrawPoly(center, sides, radius, rotation, color); // Draw a regular polygon (Vector version)
     }
 
     void DrawPolyLines(Vector2 center, int sides, float radius, float rotation, Color color)
     {
         ::DrawPolyLines(reinterpret_cast<::Vector2 &>(center), sides, radius, rotation, reinterpret_cast<::Color &>(color)); // Draw a polygon outline of n sides
-        // ::DrawPolyLines(center, sides, radius, rotation, color); // Draw a polygon outline of n sides
     }
 
     void DrawPolyLinesEx(Vector2 center, int sides, float radius, float rotation, float lineThick, Color color)
     {
         ::DrawPolyLinesEx(reinterpret_cast<::Vector2 &>(center), sides, radius, rotation, lineThick, reinterpret_cast<::Color &>(color)); // Draw a polygon outline of n sides with extended parameters
-        // ::DrawPolyLinesEx(center, sides, radius, rotation, lineThick, color); // Draw a polygon outline of n sides with extended parameters
     }
 
     void DrawSplineLinear(Vector2 *points, int pointCount, float thick, Color color)
     {
         ::DrawSplineLinear(reinterpret_cast<::Vector2 *>(points), pointCount, thick, reinterpret_cast<::Color &>(color)); // Draw spline: Linear, minimum 2 points
-        // ::DrawSplineLinear(points, pointCount, thick, color); // Draw spline: Linear, minimum 2 points
     }
 
     void DrawSplineBasis(Vector2 *points, int pointCount, float thick, Color color)
     {
         ::DrawSplineBasis(reinterpret_cast<::Vector2 *>(points), pointCount, thick, reinterpret_cast<::Color &>(color)); // Draw spline: B-Spline, minimum 4 points
-        // ::DrawSplineBasis(points, pointCount, thick, color); // Draw spline: B-Spline, minimum 4 points
     }
 
     void DrawSplineCatmullRom(Vector2 *points, int pointCount, float thick, Color color)
     {
         ::DrawSplineCatmullRom(reinterpret_cast<::Vector2 *>(points), pointCount, thick, reinterpret_cast<::Color &>(color)); // Draw spline: Catmull-Rom, minimum 4 points
-        // ::DrawSplineCatmullRom(points, pointCount, thick, color); // Draw spline: Catmull-Rom, minimum 4 points
     }
 
     void DrawSplineBezierQuadratic(Vector2 *points, int pointCount, float thick, Color color)
     {
         ::DrawSplineBezierQuadratic(reinterpret_cast<::Vector2 *>(points), pointCount, thick, reinterpret_cast<::Color &>(color)); // Draw spline: Quadratic Bezier, minimum 3 points (1 control point): [p1, c2, p3, c4...]
-        // ::DrawSplineBezierQuadratic(points, pointCount, thick, color); // Draw spline: Quadratic Bezier, minimum 3 points (1 control point): [p1, c2, p3, c4...]
     }
 
     void DrawSplineBezierCubic(Vector2 *points, int pointCount, float thick, Color color)
     {
         ::DrawSplineBezierCubic(reinterpret_cast<::Vector2 *>(points), pointCount, thick, reinterpret_cast<::Color &>(color)); // Draw spline: Cubic Bezier, minimum 4 points (2 control points): [p1, c2, c3, p4, c5, c6...]
-        // ::DrawSplineBezierCubic(points, pointCount, thick, color); // Draw spline: Cubic Bezier, minimum 4 points (2 control points): [p1, c2, c3, p4, c5, c6...]
     }
 
     void DrawSplineSegmentLinear(Vector2 p1, Vector2 p2, float thick, Color color)
     {
         ::DrawSplineSegmentLinear(reinterpret_cast<::Vector2 &>(p1), reinterpret_cast<::Vector2 &>(p2), thick, reinterpret_cast<::Color &>(color)); // Draw spline segment: Linear, 2 points
-        // ::DrawSplineSegmentLinear(p1, p2, thick, color); // Draw spline segment: Linear, 2 points
     }
 
     void DrawSplineSegmentBasis(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float thick, Color color)
     {
         ::DrawSplineSegmentBasis(reinterpret_cast<::Vector2 &>(p1), reinterpret_cast<::Vector2 &>(p2), reinterpret_cast<::Vector2 &>(p3), reinterpret_cast<::Vector2 &>(p4), thick, reinterpret_cast<::Color &>(color)); // Draw spline segment: B-Spline, 4 points
-        // ::DrawSplineSegmentBasis(p1, p2, p3, p4, thick, color); // Draw spline segment: B-Spline, 4 points
     }
 
     void DrawSplineSegmentCatmullRom(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float thick, Color color)
     {
         ::DrawSplineSegmentCatmullRom(reinterpret_cast<::Vector2 &>(p1), reinterpret_cast<::Vector2 &>(p2), reinterpret_cast<::Vector2 &>(p3), reinterpret_cast<::Vector2 &>(p4), thick, reinterpret_cast<::Color &>(color)); // Draw spline segment: Catmull-Rom, 4 points
-        // ::DrawSplineSegmentCatmullRom(p1, p2, p3, p4, thick, color); // Draw spline segment: Catmull-Rom, 4 points
     }
 
     void DrawSplineSegmentBezierQuadratic(Vector2 p1, Vector2 c2, Vector2 p3, float thick, Color color)
     {
         ::DrawSplineSegmentBezierQuadratic(reinterpret_cast<::Vector2 &>(p1), reinterpret_cast<::Vector2 &>(c2), reinterpret_cast<::Vector2 &>(p3), thick, reinterpret_cast<::Color &>(color)); // Draw spline segment: Quadratic Bezier, 2 points, 1 control point
-        // ::DrawSplineSegmentBezierQuadratic(p1, c2, p3, thick, color); // Draw spline segment: Quadratic Bezier, 2 points, 1 control point
     }
 
     void DrawSplineSegmentBezierCubic(Vector2 p1, Vector2 c2, Vector2 c3, Vector2 p4, float thick, Color color)
     {
         ::DrawSplineSegmentBezierCubic(reinterpret_cast<::Vector2 &>(p1), reinterpret_cast<::Vector2 &>(c2), reinterpret_cast<::Vector2 &>(c3), reinterpret_cast<::Vector2 &>(p4), thick, reinterpret_cast<::Color &>(color)); // Draw spline segment: Cubic Bezier, 2 points, 2 control points
-        // ::DrawSplineSegmentBezierCubic(p1, c2, c3, p4, thick, color); // Draw spline segment: Cubic Bezier, 2 points, 2 control points
     }
 
     Vector2 GetSplinePointLinear(Vector2 startPos, Vector2 endPos, float t)
     {
         ::Vector2 temp = ::GetSplinePointLinear(reinterpret_cast<::Vector2 &>(startPos), reinterpret_cast<::Vector2 &>(endPos), t);
         return reinterpret_cast<Vector2 &>(temp);
-
-        // return ::GetSplinePointLinear(startPos, endPos, t); // Get (evaluate) spline point: Linear
     }
 
     Vector2 GetSplinePointBasis(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float t)
     {
         ::Vector2 temp = ::GetSplinePointBasis(reinterpret_cast<::Vector2 &>(p1), reinterpret_cast<::Vector2 &>(p2), reinterpret_cast<::Vector2 &>(p3), reinterpret_cast<::Vector2 &>(p4), t);
         return reinterpret_cast<Vector2 &>(temp);
-
-        // return ::GetSplinePointBasis(p1, p2, p3, p4, t); // Get (evaluate) spline point: B-Spline
     }
 
     Vector2 GetSplinePointCatmullRom(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float t)
     {
         ::Vector2 temp = ::GetSplinePointCatmullRom(reinterpret_cast<::Vector2 &>(p1), reinterpret_cast<::Vector2 &>(p2), reinterpret_cast<::Vector2 &>(p3), reinterpret_cast<::Vector2 &>(p4), t);
         return reinterpret_cast<Vector2 &>(temp);
-
-        // return ::GetSplinePointCatmullRom(p1, p2, p3, p4, t); // Get (evaluate) spline point: Catmull-Rom
     }
 
     Vector2 GetSplinePointBezierQuad(Vector2 p1, Vector2 c2, Vector2 p3, float t)
     {
         ::Vector2 temp = ::GetSplinePointBezierQuad(reinterpret_cast<::Vector2 &>(p1), reinterpret_cast<::Vector2 &>(c2), reinterpret_cast<::Vector2 &>(p3), t);
         return reinterpret_cast<Vector2 &>(temp);
-
-        // return ::GetSplinePointBezierQuad(p1, c2, p3, t); // Get (evaluate) spline point: Quadratic Bezier
     }
 
     Vector2 GetSplinePointBezierCubic(Vector2 p1, Vector2 c2, Vector2 c3, Vector2 p4, float t)
     {
         ::Vector2 temp = ::GetSplinePointBezierCubic(reinterpret_cast<::Vector2 &>(p1), reinterpret_cast<::Vector2 &>(c2), reinterpret_cast<::Vector2 &>(c3), reinterpret_cast<::Vector2 &>(p4), t);
         return reinterpret_cast<Vector2 &>(temp);
-
-        // return ::GetSplinePointBezierCubic(p1, c2, c3, p4, t); // Get (evaluate) spline point: Cubic Bezier
     }
 
     bool CheckCollisionRecs(Rectangle rec1, Rectangle rec2)
     {
         return ::CheckCollisionRecs(reinterpret_cast<::Rectangle &>(rec1), reinterpret_cast<::Rectangle &>(rec2)); // Check collision between two rectangles
-        // return ::CheckCollisionRecs(rec1, rec2); // Check collision between two rectangles
     }
 
     bool CheckCollisionCircles(Vector2 center1, float radius1, Vector2 center2, float radius2)
     {
         return ::CheckCollisionCircles(reinterpret_cast<::Vector2 &>(center1), radius1, reinterpret_cast<::Vector2 &>(center2), radius2); // Check collision between two circles
-        // return ::CheckCollisionCircles(center1, radius1, center2, radius2); // Check collision between two circles
     }
 
     bool CheckCollisionCircleRec(Vector2 center, float radius, Rectangle rec)
     {
         return ::CheckCollisionCircleRec(reinterpret_cast<::Vector2 &>(center), radius, reinterpret_cast<::Rectangle &>(rec)); // Check collision between circle and rectangle
-        // return ::CheckCollisionCircleRec(center, radius, rec); // Check collision between circle and rectangle
     }
 
     bool CheckCollisionPointRec(Vector2 point, Rectangle rec)
     {
         return ::CheckCollisionPointRec(reinterpret_cast<::Vector2 &>(point), reinterpret_cast<::Rectangle &>(rec)); // Check if point is inside rectangle
-        // return ::CheckCollisionPointRec(point, rec); // Check if point is inside rectangle
     }
 
     bool CheckCollisionPointCircle(Vector2 point, Vector2 center, float radius)
     {
         return ::CheckCollisionPointCircle(reinterpret_cast<::Vector2 &>(point), reinterpret_cast<::Vector2 &>(center), radius); // Check if point is inside circle
-        // return ::CheckCollisionPointCircle(point, center, radius); // Check if point is inside circle
     }
 
     bool CheckCollisionPointTriangle(Vector2 point, Vector2 p1, Vector2 p2, Vector2 p3)
     {
         return ::CheckCollisionPointTriangle(reinterpret_cast<::Vector2 &>(point), reinterpret_cast<::Vector2 &>(p1), reinterpret_cast<::Vector2 &>(p2), reinterpret_cast<::Vector2 &>(p3)); // Check if point is inside a triangle
-        // return ::CheckCollisionPointTriangle(point, p1, p2, p3); // Check if point is inside a triangle
     }
 
     bool CheckCollisionPointPoly(Vector2 point, Vector2 *points, int pointCount)
     {
         return ::CheckCollisionPointPoly(reinterpret_cast<::Vector2 &>(point), reinterpret_cast<::Vector2 *>(points), pointCount); // Check if point is within a polygon described by array of vertices
-        // return ::CheckCollisionPointPoly(point, points, pointCount); // Check if point is within a polygon described by array of vertices
     }
 
     bool CheckCollisionLines(Vector2 startPos1, Vector2 endPos1, Vector2 startPos2, Vector2 endPos2, Vector2 *collisionPoint)
     {
         return ::CheckCollisionLines(reinterpret_cast<::Vector2 &>(startPos1), reinterpret_cast<::Vector2 &>(endPos1), reinterpret_cast<::Vector2 &>(startPos2), reinterpret_cast<::Vector2 &>(endPos2), reinterpret_cast<::Vector2 *>(collisionPoint)); // Check the collision between two lines defined by two points each, returns collision point by reference
-        // return ::CheckCollisionLines(startPos1, endPos1, startPos2, endPos2, collisionPoint); // Check the collision between two lines defined by two points each, returns collision point by reference
     }
 
     bool CheckCollisionPointLine(Vector2 point, Vector2 p1, Vector2 p2, int threshold)
     {
         return ::CheckCollisionPointLine(reinterpret_cast<::Vector2 &>(point), reinterpret_cast<::Vector2 &>(p1), reinterpret_cast<::Vector2 &>(p2), threshold); // Check if point belongs to line created between two points [p1] and [p2] with defined margin in pixels [threshold]
-        // return ::CheckCollisionPointLine(point, p1, p2, threshold); // Check if point belongs to line created between two points [p1] and [p2] with defined margin in pixels [threshold]
     }
 
     Rectangle GetCollisionRec(Rectangle rec1, Rectangle rec2)
     {
         ::Rectangle temp = ::GetCollisionRec(reinterpret_cast<::Rectangle &>(rec1), reinterpret_cast<::Rectangle &>(rec2));
         return reinterpret_cast<Rectangle &>(temp);
-
-        // return ::GetCollisionRec(rec1, rec2); // Get collision rectangle for two rectangles collision
     }
 
     //------------------------------------------------------------------------------------rtextures------------------------------------------------------------------------------------
@@ -1537,192 +1387,145 @@ namespace rlw
     {
         ::Image temp = ::LoadImage(fileName);
         return reinterpret_cast<Image &>(temp);
-
-        // return ::LoadImage(fileName); // Load image from file into CPU memory (RAM)
-        // return ::LoadImage(fileName); // Load image from file into CPU memory (RAM)
     }
 
     Image LoadImageRaw(const char *fileName, int width, int height, int format, int headerSize)
     {
         ::Image temp = ::LoadImageRaw(fileName, width, height, format, headerSize);
         return reinterpret_cast<Image &>(temp);
-
-        // return ::LoadImageRaw(fileName, width, height, format, headerSize); // Load image from RAW file data
     }
 
     Image LoadImageSvg(const char *fileNameOrString, int width, int height)
     {
         ::Image temp = ::LoadImageSvg(fileNameOrString, width, height);
         return reinterpret_cast<Image &>(temp);
-
-        // return ::LoadImageSvg(fileNameOrString, width, height); // Load image from SVG file data or string with specified size
     }
 
     Image LoadImageAnim(const char *fileName, int *frames)
     {
         ::Image temp = ::LoadImageAnim(fileName, frames);
         return reinterpret_cast<Image &>(temp);
-
-        // return ::LoadImageAnim(fileName, frames); // Load image sequence from file (frames appended to image.data)
     }
 
     Image LoadImageFromMemory(const char *fileType, const unsigned char *fileData, int dataSize)
     {
         ::Image temp = ::LoadImageFromMemory(fileType, fileData, dataSize);
         return reinterpret_cast<Image &>(temp);
-
-        // return ::LoadImageFromMemory(fileType, fileData, dataSize); // Load image from memory buffer, fileType refers to extension: i.e. '.png'
     }
 
     Image LoadImageFromTexture(Texture2D texture)
     {
         ::Image temp = ::LoadImageFromTexture(reinterpret_cast<::Texture2D &>(texture));
         return reinterpret_cast<Image &>(temp);
-
-        // return ::LoadImageFromTexture(texture); // Load image from GPU texture data
     }
 
     Image LoadImageFromScreen(void)
     {
         ::Image temp = ::LoadImageFromScreen();
         return reinterpret_cast<Image &>(temp);
-
-        // return ::LoadImageFromScreen(); // Load image from screen buffer and (screenshot)
     }
 
     bool IsImageReady(Image image)
     {
         return ::IsImageReady(reinterpret_cast<::Image &>(image)); // Check if an image is ready
-        // return ::IsImageReady(reinterpret_cast<::Image &>(image)); // Check if an image is ready
-        // return ::IsImageReady(image); // Check if an image is ready
     }
 
     void UnloadImage(Image image)
     {
         ::UnloadImage(reinterpret_cast<::Image &>(image)); // Unload image from CPU memory (RAM)
-        // ::UnloadImage(image); // Unload image from CPU memory (RAM)
     }
 
     bool ExportImage(Image image, const char *fileName)
     {
         return ::ExportImage(reinterpret_cast<::Image &>(image), fileName); // Export image data to file, returns true on success
-        // return ::ExportImage(image, fileName); // Export image data to file, returns true on success
     }
 
     unsigned char *ExportImageToMemory(Image image, const char *fileType, int *fileSize)
     {
         return ::ExportImageToMemory(reinterpret_cast<::Image &>(image), fileType, fileSize); // Export image to memory buffer
-        // return ::ExportImageToMemory(image, fileType, fileSize); // Export image to memory buffer
     }
 
     bool ExportImageAsCode(Image image, const char *fileName)
     {
         return ::ExportImageAsCode(reinterpret_cast<::Image &>(image), fileName); // Export image as code file defining an array of bytes, returns true on success
-        // return ::ExportImageAsCode(image, fileName); // Export image as code file defining an array of bytes, returns true on success
     }
 
     Image GenImageColor(int width, int height, Color color)
     {
         ::Image temp = ::GenImageColor(width, height, reinterpret_cast<::Color &>(color));
         return reinterpret_cast<Image &>(temp);
-
-        // return ::GenImageColor(width, height, color); // Generate image: plain color
     }
 
     Image GenImageGradientLinear(int width, int height, int direction, Color start, Color end)
     {
         ::Image temp = ::GenImageGradientLinear(width, height, direction, reinterpret_cast<::Color &>(start), reinterpret_cast<::Color &>(end));
         return reinterpret_cast<Image &>(temp);
-
-        // return ::GenImageGradientLinear(width, height, direction, start, end); // Generate image: linear gradient, direction in degrees [0..360], 0=Vertical gradient
     }
 
     Image GenImageGradientRadial(int width, int height, float density, Color inner, Color outer)
     {
         ::Image temp = ::GenImageGradientRadial(width, height, density, reinterpret_cast<::Color &>(inner), reinterpret_cast<::Color &>(outer));
         return reinterpret_cast<Image &>(temp);
-
-        // return ::GenImageGradientRadial(width, height, density, inner, outer); // Generate image: radial gradient
     }
 
     Image GenImageGradientSquare(int width, int height, float density, Color inner, Color outer)
     {
         ::Image temp = ::GenImageGradientSquare(width, height, density, reinterpret_cast<::Color &>(inner), reinterpret_cast<::Color &>(outer));
         return reinterpret_cast<Image &>(temp);
-
-        // return ::GenImageGradientSquare(width, height, density, inner, outer); // Generate image: square gradient
     }
 
     Image GenImageChecked(int width, int height, int checksX, int checksY, Color col1, Color col2)
     {
         ::Image temp = ::GenImageChecked(width, height, checksX, checksY, reinterpret_cast<::Color &>(col1), reinterpret_cast<::Color &>(col2));
         return reinterpret_cast<Image &>(temp);
-
-        // return ::GenImageChecked(width, height, checksX, checksY, col1, col2); // Generate image: checked
     }
 
     Image GenImageWhiteNoise(int width, int height, float factor)
     {
         ::Image temp = ::GenImageWhiteNoise(width, height, factor);
         return reinterpret_cast<Image &>(temp);
-
-        // return ::GenImageWhiteNoise(width, height, factor); // Generate image: white noise
     }
 
     Image GenImagePerlinNoise(int width, int height, int offsetX, int offsetY, float scale)
     {
         ::Image temp = ::GenImagePerlinNoise(width, height, offsetX, offsetY, scale);
         return reinterpret_cast<Image &>(temp);
-
-        // return ::GenImagePerlinNoise(width, height, offsetX, offsetY, scale); // Generate image: perlin noise
     }
 
     Image GenImageCellular(int width, int height, int tileSize)
     {
         ::Image temp = ::GenImageCellular(width, height, tileSize);
         return reinterpret_cast<Image &>(temp);
-
-        // return ::GenImageCellular(width, height, tileSize); // Generate image: cellular algorithm, bigger tileSize means bigger cells
     }
 
     Image GenImageText(int width, int height, const char *text)
     {
         ::Image temp = ::GenImageText(width, height, text);
         return reinterpret_cast<Image &>(temp);
-
-        // return ::GenImageText(width, height, text); // Generate image: grayscale image from text data
     }
 
     Image ImageCopy(Image image)
     {
         ::Image temp = ImageCopy(reinterpret_cast<::Image &>(image));
         return reinterpret_cast<Image &>(temp);
-
-        // return ImageCopy(image); // Create an image duplicate (useful for transformations)
     }
 
     Image ImageFromImage(Image image, Rectangle rec)
     {
         ::Image temp = ImageFromImage(reinterpret_cast<::Image &>(image), reinterpret_cast<::Rectangle &>(rec));
         return reinterpret_cast<Image &>(temp);
-
-        // return ImageFromImage(image, rec); // Create an image from another image piece
     }
 
     Image ImageText(const char *text, int fontSize, Color color)
     {
         ::Image temp = ImageText(text, fontSize, reinterpret_cast<::Color &>(color));
         return reinterpret_cast<Image &>(temp);
-
-        // return ImageText(text, fontSize, color); // Create an image from text (default font)
     }
 
     Image ImageTextEx(Font font, const char *text, float fontSize, float spacing, Color tint)
     {
         ::Image temp = ImageTextEx(reinterpret_cast<::Font &>(font), text, fontSize, spacing, reinterpret_cast<::Color &>(tint));
         return reinterpret_cast<Image &>(temp);
-
-        // return ImageTextEx(font, text, fontSize, spacing, tint); // Create an image from text (custom sprite font)
     }
 
     void ImageFormat(Image *image, int newFormat)
@@ -1849,24 +1652,13 @@ namespace rlw
     {
         ::Color *temp = ::LoadImageColors(reinterpret_cast<::Image &>(image));
         return reinterpret_cast<Color *>(temp);
-
-        // return ::LoadImageColors(image); // Load color data from image as a Color array (RGBA - 32bit)
     }
 
-    // Color *LoadImageColors(Image image)
-    // {
-    //     Color* temp = ::LoadImageColors(image);
-    //     return reinterpret_cast<Color *>(&temp);
-
-    //     // return ::LoadImageColors(image); // Load color data from image as a Color array (RGBA - 32bit)
-    // }
 
     Color *LoadImagePalette(Image image, int maxPaletteSize, int *colorCount)
     {
         ::Color *temp = ::LoadImagePalette(reinterpret_cast<::Image &>(image), maxPaletteSize, colorCount);
         return reinterpret_cast<Color *>(temp);
-
-        // return ::LoadImagePalette(image, maxPaletteSize, colorCount); // Load colors palette from image as a Color array (RGBA - 32bit)
     }
 
     void UnloadImageColors(Color *colors)
@@ -1979,116 +1771,94 @@ namespace rlw
     {
         ::Texture2D temp = ::LoadTexture(fileName);
         return reinterpret_cast<Texture2D &>(temp);
-
-        // return ::LoadTexture(fileName); // Load texture from file into GPU memory (VRAM)
     }
 
     Texture2D LoadTextureFromImage(Image image)
     {
         ::Texture2D temp = ::LoadTextureFromImage(reinterpret_cast<::Image &>(image));
         return reinterpret_cast<Texture2D &>(temp);
-
-        // return ::LoadTextureFromImage(image); // Load texture from image data
     }
 
     TextureCubemap LoadTextureCubemap(Image image, int layout)
     {
         ::TextureCubemap temp = ::LoadTextureCubemap(reinterpret_cast<::Image &>(image), layout);
         return reinterpret_cast<TextureCubemap &>(temp);
-
-        // return ::LoadTextureCubemap(image, layout); // Load cubemap from image, multiple image cubemap layouts supported
     }
 
     RenderTexture2D LoadRenderTexture(int width, int height)
     {
         ::RenderTexture2D temp = ::LoadRenderTexture(width, height);
         return reinterpret_cast<RenderTexture2D &>(temp);
-
-        // return ::LoadRenderTexture(width, height); // Load texture for rendering (framebuffer)
     }
 
     bool IsTextureReady(Texture2D texture)
     {
         return ::IsTextureReady(reinterpret_cast<::Texture2D &>(texture)); // Check if a texture is ready
-        // return ::IsTextureReady(texture); // Check if a texture is ready
     }
 
     void UnloadTexture(Texture2D texture)
     {
         ::UnloadTexture(reinterpret_cast<::Texture2D &>(texture)); // Unload texture from GPU memory (VRAM)
-        // ::UnloadTexture(texture); // Unload texture from GPU memory (VRAM)
     }
 
     bool IsRenderTextureReady(RenderTexture2D target)
     {
         return ::IsRenderTextureReady(reinterpret_cast<::RenderTexture2D &>(target)); // Check if a render texture is ready
-        // return ::IsRenderTextureReady(target); // Check if a render texture is ready
     }
 
     void UnloadRenderTexture(RenderTexture2D target)
     {
         ::UnloadRenderTexture(reinterpret_cast<::RenderTexture2D &>(target)); // Unload render texture from GPU memory (VRAM)
-        // ::UnloadRenderTexture(target); // Unload render texture from GPU memory (VRAM)
     }
 
     void UpdateTexture(Texture2D texture, const void *pixels)
     {
         ::UpdateTexture(reinterpret_cast<::Texture2D &>(texture), pixels); // Update GPU texture with new data
-        // ::UpdateTexture(texture, pixels); // Update GPU texture with new data
     }
 
     void UpdateTextureRec(Texture2D texture, Rectangle rec, const void *pixels)
     {
         ::UpdateTextureRec(reinterpret_cast<::Texture2D &>(texture), reinterpret_cast<::Rectangle &>(rec), pixels); // Update GPU texture rectangle with new data
-        // ::UpdateTextureRec(texture, rec, pixels); // Update GPU texture rectangle with new data
     }
 
     void GenTextureMipmaps(Texture2D *texture)
     {
         ::GenTextureMipmaps(reinterpret_cast<::Texture2D *>(texture)); // Generate GPU mipmaps for a texture
-        // ::GenTextureMipmaps(texture); // Generate GPU mipmaps for a texture
     }
 
     void SetTextureFilter(Texture2D texture, int filter)
     {
         ::SetTextureFilter(reinterpret_cast<::Texture2D &>(texture), filter); // Set texture scaling filter mode
-        // ::SetTextureFilter(texture, filter); // Set texture scaling filter mode
     }
 
     void SetTextureWrap(Texture2D texture, int wrap)
     {
         ::SetTextureWrap(reinterpret_cast<::Texture2D &>(texture), wrap); // Set texture wrapping mode
-        // ::SetTextureWrap(texture, wrap); // Set texture wrapping mode
     }
 
     void DrawTexture(Texture2D texture, int posX, int posY, Color tint)
     {
         ::DrawTexture(reinterpret_cast<::Texture2D &>(texture), posX, posY, reinterpret_cast<::Color &>(tint)); // Draw a Texture2D
-        // ::DrawTexture(texture, posX, posY, tint); // Draw a Texture2D
     }
 
     void DrawTextureV(Texture2D texture, Vector2 position, Color tint)
     {
         ::DrawTextureV(reinterpret_cast<::Texture2D &>(texture), reinterpret_cast<::Vector2 &>(position), reinterpret_cast<::Color &>(tint)); // Draw a Texture2D with position defined as Vector2
-        // ::DrawTextureV(texture, position, tint); // Draw a Texture2D with position defined as Vector2
     }
 
     void DrawTextureEx(Texture2D texture, Vector2 position, float rotation, float scale, Color tint)
     {
         ::DrawTextureEx(reinterpret_cast<::Texture2D &>(texture), reinterpret_cast<::Vector2 &>(position), rotation, scale, reinterpret_cast<::Color &>(tint)); // Draw a Texture2D with extended parameters
-        // ::DrawTextureEx(texture, position, rotation, scale, tint); // Draw a Texture2D with extended parameters
     }
 
     void DrawTextureRec(Texture2D texture, Rectangle source, Vector2 position, Color tint)
     {
         ::DrawTextureRec(reinterpret_cast<::Texture2D &>(texture), reinterpret_cast<::Rectangle &>(source), reinterpret_cast<::Vector2 &>(position), reinterpret_cast<::Color &>(tint)); // Draw a part of a texture defined by a rectangle
-        // ::DrawTextureRec(texture, source, position, tint); // Draw a part of a texture defined by a rectangle
     }
 
     void DrawTexturePro(Texture2D texture, Rectangle source, Rectangle dest, Vector2 origin, float rotation, Color tint)
     {
         ::DrawTexturePro(reinterpret_cast<::Texture2D &>(texture), reinterpret_cast<::Rectangle &>(source), reinterpret_cast<::Rectangle &>(dest), reinterpret_cast<::Vector2 &>(origin), rotation, reinterpret_cast<::Color &>(tint)); // Draw a part of a texture defined by a rectangle with 'pro' parameters
-        // ::DrawTexturePro(texture, source, dest, origin, rotation, tint); // Draw a part of a texture defined by a rectangle with 'pro' parameters
     }
 
     void DrawTextureNPatch(Texture2D texture, NPatchInfo nPatchInfo, Rectangle dest, Vector2 origin, float rotation, Color tint)
@@ -2100,8 +1870,6 @@ namespace rlw
     {
         ::Color temp = ::Fade(reinterpret_cast<::Color &>(color), alpha);
         return reinterpret_cast<Color &>(temp);
-
-        // return ::Fade(color, alpha); // Get color with alpha applied, alpha goes from 0.0f to 1.0f
     }
 
     int ColorToInt(Color color)
@@ -2113,90 +1881,66 @@ namespace rlw
     {
         ::Vector4 temp = ::ColorNormalize(reinterpret_cast<::Color &>(color));
         return reinterpret_cast<Vector4 &>(temp);
-
-        // return ColorNormalize(color); // Get Color normalized as float [0..1]
     }
 
     Color ColorFromNormalized(Vector4 normalized)
     {
         ::Color temp = ::ColorFromNormalized(reinterpret_cast<::Vector4 &>(normalized));
         return reinterpret_cast<Color &>(temp);
-
-        // return ColorFromNormalized(normalized); // Get Color from normalized values [0..1]
     }
 
     Vector3 ColorToHSV(Color color)
     {
-
         ::Vector3 temp = ::ColorToHSV(reinterpret_cast<::Color &>(color));
         return reinterpret_cast<Vector3 &>(temp);
-
-        // return ColorToHSV(color); // Get HSV values for a Color, hue [0..360], saturation/value [0..1]
     }
 
     Color ColorFromHSV(float hue, float saturation, float value)
     {
         ::Color temp = ::ColorFromHSV(hue, saturation, value);
         return reinterpret_cast<Color &>(temp);
-
-        // return ColorFromHSV(hue, saturation, value); // Get a Color from HSV values, hue [0..360], saturation/value [0..1]
     }
 
     Color ColorTint(Color color, Color tint)
     {
         ::Color temp = ::ColorTint(reinterpret_cast<::Color &>(color), reinterpret_cast<::Color &>(tint));
         return reinterpret_cast<Color &>(temp);
-
-        // return ColorTint(color, tint); // Get color multiplied with another color
     }
 
     Color ColorBrightness(Color color, float factor)
     {
         ::Color temp = ::ColorBrightness(reinterpret_cast<::Color &>(color), factor);
         return reinterpret_cast<Color &>(temp);
-
-        // return ColorBrightness(color, factor); // Get color with brightness correction, brightness factor goes from -1.0f to 1.0f
     }
 
     Color ColorContrast(Color color, float contrast)
     {
         ::Color temp = ::ColorContrast(reinterpret_cast<::Color &>(color), contrast);
         return reinterpret_cast<Color &>(temp);
-
-        // return ColorContrast(color, contrast); // Get color with contrast correction, contrast values between -1.0f and 1.0f
     }
 
     Color ColorAlpha(Color color, float alpha)
     {
         ::Color temp = ::ColorAlpha(reinterpret_cast<::Color &>(color), alpha);
         return reinterpret_cast<Color &>(temp);
-
-        // return ColorAlpha(color, alpha); // Get color with alpha applied, alpha goes from 0.0f to 1.0f
     }
 
     Color ColorAlphaBlend(Color dst, Color src, Color tint)
     {
-
         ::Color temp = ::ColorAlphaBlend(reinterpret_cast<::Color &>(dst), reinterpret_cast<::Color &>(src), reinterpret_cast<::Color &>(tint));
         return reinterpret_cast<Color &>(temp);
-
-        // return ColorAlphaBlend(dst, src, tint); // Get src alpha-blended into dst color with tint
     }
 
     Color GetColor(unsigned int hexValue)
     {
         ::Color temp = ::GetColor(hexValue);
         return reinterpret_cast<Color &>(temp);
-
-        // return ::GetColor(hexValue); // Get Color structure from hexadecimal value
     }
 
     Color GetPixelColor(void *srcPtr, int format)
     {
         ::Color temp = ::GetPixelColor(srcPtr, format);
         return reinterpret_cast<Color &>(temp);
-
-        // return ::GetPixelColor(srcPtr, format); // Get Color from a source pixel pointer of certain format
     }
 
     void SetPixelColor(void *dstPtr, Color color, int format)
@@ -2215,40 +1959,30 @@ namespace rlw
     {
         ::Font temp = ::GetFontDefault();
         return reinterpret_cast<Font &>(temp);
-
-        // return ::GetFontDefault(); // Get the default Font
     }
 
     Font LoadFont(const char *fileName)
     {
         ::Font temp = ::LoadFont(fileName);
         return reinterpret_cast<Font &>(temp);
-
-        // return ::LoadFont(fileName); // Load font from file into GPU memory (VRAM)
     }
 
     Font LoadFontEx(const char *fileName, int fontSize, int *codepoints, int codepointCount)
     {
         ::Font temp = ::LoadFontEx(fileName, fontSize, codepoints, codepointCount);
         return reinterpret_cast<Font &>(temp);
-
-        // return ::LoadFontEx(fileName, fontSize, codepoints, codepointCount); // Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character set
     }
 
     Font LoadFontFromImage(Image image, Color key, int firstChar)
     {
         ::Font temp = ::LoadFontFromImage(reinterpret_cast<::Image &>(image), reinterpret_cast<::Color &>(key), firstChar);
         return reinterpret_cast<Font &>(temp);
-
-        // return ::LoadFontFromImage(image, key, firstChar); // Load font from Image (XNA style)
     }
 
     Font LoadFontFromMemory(const char *fileType, const unsigned char *fileData, int dataSize, int fontSize, int *codepoints, int codepointCount)
     {
         ::Font temp = ::LoadFontFromMemory(fileType, fileData, dataSize, fontSize, codepoints, codepointCount);
         return reinterpret_cast<Font &>(temp);
-
-        // return ::LoadFontFromMemory(fileType, fileData, dataSize, fontSize, codepoints, codepointCount); // Load font from memory buffer, fileType refers to extension: i.e. '.ttf'
     }
 
     bool IsFontReady(Font font)
@@ -2260,16 +1994,12 @@ namespace rlw
     {
         ::GlyphInfo *temp = ::LoadFontData(fileData, dataSize, fontSize, codepoints, codepointCount, type);
         return reinterpret_cast<GlyphInfo *>(temp);
-
-        // return ::LoadFontData(fileData, dataSize, fontSize, codepoints, codepointCount, type); // Load font data for further use
     }
 
     Image GenImageFontAtlas(const GlyphInfo *glyphs, Rectangle **glyphRecs, int glyphCount, int fontSize, int padding, int packMethod)
     {
         ::Image temp = ::GenImageFontAtlas(reinterpret_cast<const ::GlyphInfo *>(glyphs), reinterpret_cast<::Rectangle **>(glyphRecs), glyphCount, fontSize, padding, packMethod);
         return reinterpret_cast<Image &>(temp);
-
-        // return ::GenImageFontAtlas(glyphs, glyphRecs, glyphCount, fontSize, padding, packMethod); // Generate image font atlas using chars info
     }
 
     void UnloadFontData(GlyphInfo *glyphs, int glyphCount)
@@ -2280,7 +2010,6 @@ namespace rlw
     void UnloadFont(Font font)
     {
         ::UnloadFont(reinterpret_cast<::Font &>(font)); // Unload font from GPU memory (VRAM)
-        // ::UnloadFont(font); // Unload font from GPU memory (VRAM)
     }
 
     bool ExportFontAsCode(Font font, const char *fileName)
@@ -2332,8 +2061,6 @@ namespace rlw
     {
         ::Vector2 temp = ::MeasureTextEx(reinterpret_cast<::Font &>(font), text, fontSize, spacing);
         return reinterpret_cast<Vector2 &>(temp);
-
-        // return ::MeasureTextEx(font, text, fontSize, spacing); // Measure string size for Font
     }
 
     int GetGlyphIndex(Font font, int codepoint)
@@ -2345,16 +2072,12 @@ namespace rlw
     {
         ::GlyphInfo temp = ::GetGlyphInfo(reinterpret_cast<::Font &>(font), codepoint);
         return reinterpret_cast<GlyphInfo &>(temp);
-
-        // return ::GetGlyphInfo(font, codepoint); // Get glyph font info data for a codepoint (unicode character), fallback to '?' if not found
     }
 
     Rectangle GetGlyphAtlasRec(Font font, int codepoint)
     {
         ::Rectangle temp = ::GetGlyphAtlasRec(reinterpret_cast<::Font &>(font), codepoint);
         return reinterpret_cast<Rectangle &>(temp);
-
-        // return ::GetGlyphAtlasRec(font, codepoint); // Get glyph rectangle in font atlas for a codepoint (unicode character), fallback to '?' if not found
     }
 
     char *LoadUTF8(const int *codepoints, int length)
@@ -2592,16 +2315,12 @@ namespace rlw
     {
         ::Model temp = ::LoadModel(fileName);
         return reinterpret_cast<Model &>(temp);
-
-        // return ::LoadModel(fileName); // Load model from files (meshes and materials)
     }
 
     Model LoadModelFromMesh(Mesh mesh)
     {
         ::Model temp = ::LoadModelFromMesh(reinterpret_cast<::Mesh &>(mesh));
         return reinterpret_cast<Model &>(temp);
-
-        // return ::LoadModelFromMesh(mesh); // Load model from generated mesh (default material)
     }
 
     bool IsModelReady(Model model)
@@ -2618,8 +2337,6 @@ namespace rlw
     {
         ::BoundingBox temp = ::GetModelBoundingBox(reinterpret_cast<::Model &>(model));
         return reinterpret_cast<BoundingBox &>(temp);
-
-        // return ::GetModelBoundingBox(model); // Compute model bounding box limits (considers all meshes)
     }
 
     void DrawModel(Model model, Vector3 position, float scale, Color tint)
@@ -2696,8 +2413,6 @@ namespace rlw
     {
         ::BoundingBox temp = ::GetMeshBoundingBox(reinterpret_cast<::Mesh &>(mesh));
         return reinterpret_cast<BoundingBox &>(temp);
-
-        // return ::GetMeshBoundingBox(mesh); // Compute mesh bounding box limits
     }
 
     void GenMeshTangents(Mesh *mesh)
@@ -2709,104 +2424,78 @@ namespace rlw
     {
         ::Mesh temp = ::GenMeshPoly(sides, radius);
         return reinterpret_cast<Mesh &>(temp);
-
-        // return ::GenMeshPoly(sides, radius); // Generate polygonal mesh
     }
 
     Mesh GenMeshPlane(float width, float length, int resX, int resZ)
     {
         ::Mesh temp = ::GenMeshPlane(width, length, resX, resZ);
         return reinterpret_cast<Mesh &>(temp);
-
-        // return ::GenMeshPlane(width, length, resX, resZ); // Generate plane mesh (with subdivisions)
     }
 
     Mesh GenMeshCube(float width, float height, float length)
     {
         ::Mesh temp = ::GenMeshCube(width, height, length);
         return reinterpret_cast<Mesh &>(temp);
-
-        // return ::GenMeshCube(width, height, length); // Generate cuboid mesh
     }
 
     Mesh GenMeshSphere(float radius, int rings, int slices)
     {
         ::Mesh temp = ::GenMeshSphere(radius, rings, slices);
         return reinterpret_cast<Mesh &>(temp);
-
-        // return ::GenMeshSphere(radius, rings, slices); // Generate sphere mesh (standard sphere)
     }
 
     Mesh GenMeshHemiSphere(float radius, int rings, int slices)
     {
         ::Mesh temp = ::GenMeshHemiSphere(radius, rings, slices);
         return reinterpret_cast<Mesh &>(temp);
-
-        // return ::GenMeshHemiSphere(radius, rings, slices); // Generate half-sphere mesh (no bottom cap)
     }
 
     Mesh GenMeshCylinder(float radius, float height, int slices)
     {
         ::Mesh temp = ::GenMeshCylinder(radius, height, slices);
         return reinterpret_cast<Mesh &>(temp);
-
-        // return ::GenMeshCylinder(radius, height, slices); // Generate cylinder mesh
     }
 
     Mesh GenMeshCone(float radius, float height, int slices)
     {
         ::Mesh temp = ::GenMeshCone(radius, height, slices);
         return reinterpret_cast<Mesh &>(temp);
-
-        // return ::GenMeshCone(radius, height, slices); // Generate cone/pyramid mesh
     }
 
     Mesh GenMeshTorus(float radius, float size, int radSeg, int sides)
     {
         ::Mesh temp = ::GenMeshTorus(radius, size, radSeg, sides);
         return reinterpret_cast<Mesh &>(temp);
-
-        // return ::GenMeshTorus(radius, size, radSeg, sides); // Generate torus mesh
     }
 
     Mesh GenMeshKnot(float radius, float size, int radSeg, int sides)
     {
         ::Mesh temp = ::GenMeshKnot(radius, size, radSeg, sides);
         return reinterpret_cast<Mesh &>(temp);
-
-        // return ::GenMeshKnot(radius, size, radSeg, sides); // Generate trefoil knot mesh
     }
 
     Mesh GenMeshHeightmap(Image heightmap, Vector3 size)
     {
         ::Mesh temp = ::GenMeshHeightmap(reinterpret_cast<::Image &>(heightmap), reinterpret_cast<::Vector3 &>(size));
         return reinterpret_cast<Mesh &>(temp);
-
-        // return ::GenMeshHeightmap(heightmap, size); // Generate heightmap mesh from image data
     }
 
     Mesh GenMeshCubicmap(Image cubicmap, Vector3 cubeSize)
     {
         ::Mesh temp = ::GenMeshCubicmap(reinterpret_cast<::Image &>(cubicmap), reinterpret_cast<::Vector3 &>(cubeSize));
         return reinterpret_cast<Mesh &>(temp);
-
-        // return ::GenMeshCubicmap(cubicmap, cubeSize); // Generate cubes-based map mesh from image data
     }
 
     Material *LoadMaterials(const char *fileName, int *materialCount)
     {
         ::Material *temp = ::LoadMaterials(fileName, materialCount);
         return reinterpret_cast<Material *>(temp);
-
-        // return ::LoadMaterials(fileName, materialCount); // Load materials from model file
     }
 
     Material LoadMaterialDefault(void)
     {
         ::Material temp = ::LoadMaterialDefault();
         return reinterpret_cast<Material &>(temp);
-
-        // return ::LoadMaterialDefault(); // Load default material (Supports: DIFFUSE, SPECULAR, NORMAL maps)
     }
 
     bool IsMaterialReady(Material material)
@@ -2833,8 +2522,6 @@ namespace rlw
     {
         ::ModelAnimation *temp = ::LoadModelAnimations(fileName, animCount);
         return reinterpret_cast<ModelAnimation *>(temp);
-
-        // return ::LoadModelAnimations(fileName, animCount); // Load model animations from file
     }
 
     void UpdateModelAnimation(Model model, ModelAnimation anim, int frame)
@@ -2876,40 +2563,30 @@ namespace rlw
     {
         ::RayCollision temp = ::GetRayCollisionSphere(reinterpret_cast<::Ray &>(ray), reinterpret_cast<::Vector3 &>(center), radius);
         return reinterpret_cast<RayCollision &>(temp);
-
-        // return ::GetRayCollisionSphere(ray, center, radius); // Get collision info between ray and sphere
     }
 
     RayCollision GetRayCollisionBox(Ray ray, BoundingBox box)
     {
         ::RayCollision temp = ::GetRayCollisionBox(reinterpret_cast<::Ray &>(ray), reinterpret_cast<::BoundingBox &>(box));
         return reinterpret_cast<RayCollision &>(temp);
-
-        // return ::GetRayCollisionBox(ray, box); // Get collision info between ray and box
     }
 
     RayCollision GetRayCollisionMesh(Ray ray, Mesh mesh, Matrix transform)
     {
         ::RayCollision temp = ::GetRayCollisionMesh(reinterpret_cast<::Ray &>(ray), reinterpret_cast<::Mesh &>(mesh), reinterpret_cast<::Matrix &>(transform));
         return reinterpret_cast<RayCollision &>(temp);
-
-        // return ::GetRayCollisionMesh(ray, mesh, transform); // Get collision info between ray and mesh
     }
 
     RayCollision GetRayCollisionTriangle(Ray ray, Vector3 p1, Vector3 p2, Vector3 p3)
     {
         ::RayCollision temp = ::GetRayCollisionTriangle(reinterpret_cast<::Ray &>(ray), reinterpret_cast<::Vector3 &>(p1), reinterpret_cast<::Vector3 &>(p2), reinterpret_cast<::Vector3 &>(p3));
         return reinterpret_cast<RayCollision &>(temp);
-
-        // return ::GetRayCollisionTriangle(ray, p1, p2, p3); // Get collision info between ray and triangle
     }
 
     RayCollision GetRayCollisionQuad(Ray ray, Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4)
     {
         ::RayCollision temp = ::GetRayCollisionQuad(reinterpret_cast<::Ray &>(ray), reinterpret_cast<::Vector3 &>(p1), reinterpret_cast<::Vector3 &>(p2), reinterpret_cast<::Vector3 &>(p3), reinterpret_cast<::Vector3 &>(p4));
         return reinterpret_cast<RayCollision &>(temp);
-
-        // return ::GetRayCollisionQuad(ray, p1, p2, p3, p4); // Get collision info between ray and quad
     }
 
     // ----------------------------------------------------------------------------------raudio----------------------------------------------------------------------------------
@@ -2943,16 +2620,12 @@ namespace rlw
     {
         ::Wave temp = ::LoadWave(fileName);
         return reinterpret_cast<Wave &>(temp);
-
-        // return ::LoadWave(fileName); // Load wave data from file
     }
 
     Wave LoadWaveFromMemory(const char *fileType, const unsigned char *fileData, int dataSize)
     {
         ::Wave temp = ::LoadWaveFromMemory(fileType, fileData, dataSize);
         return reinterpret_cast<Wave &>(temp);
-
-        // return ::LoadWaveFromMemory(fileType, fileData, dataSize); // Load wave from memory buffer, fileType refers to extension: i.e. '.wav'
     }
 
     bool IsWaveReady(Wave wave)
@@ -2964,24 +2637,18 @@ namespace rlw
     {
         ::Sound temp = ::LoadSound(fileName);
         return reinterpret_cast<Sound &>(temp);
-
-        // return ::LoadSound(fileName); // Load sound from file
     }
 
     Sound LoadSoundFromWave(Wave wave)
     {
         ::Sound temp = ::LoadSoundFromWave(reinterpret_cast<::Wave &>(wave));
         return reinterpret_cast<Sound &>(temp);
-
-        // return ::LoadSoundFromWave(wave); // Load sound from wave data
     }
 
     Sound LoadSoundAlias(Sound source)
     {
         ::Sound temp = ::LoadSoundAlias(reinterpret_cast<::Sound &>(source));
         return reinterpret_cast<Sound &>(temp);
-
-        // return ::LoadSoundAlias(source); // Create a new sound that shares the same sample data as the source sound, does not own the sound data
     }
 
     bool IsSoundReady(Sound sound)
@@ -3063,8 +2730,6 @@ namespace rlw
     {
         ::Wave temp = WaveCopy(reinterpret_cast<::Wave &>(wave));
         return reinterpret_cast<Wave &>(temp);
-
-        // return WaveCopy(wave); // Copy a wave to a new wave
     }
 
     void WaveCrop(Wave *wave, int initSample, int finalSample)
@@ -3091,16 +2756,12 @@ namespace rlw
     {
         ::Music temp = ::LoadMusicStream(fileName);
         return reinterpret_cast<Music &>(temp);
-
-        // return ::LoadMusicStream(fileName); // Load music stream from file
     }
 
     Music LoadMusicStreamFromMemory(const char *fileType, const unsigned char *data, int dataSize)
     {
         ::Music temp = ::LoadMusicStreamFromMemory(fileType, data, dataSize);
         return reinterpret_cast<Music &>(temp);
-
-        // return ::LoadMusicStreamFromMemory(fileType, data, dataSize); // Load music stream from data
     }
 
     bool IsMusicReady(Music music)
@@ -3177,8 +2838,6 @@ namespace rlw
     {
         ::AudioStream temp = ::LoadAudioStream(sampleRate, sampleSize, channels);
         return reinterpret_cast<AudioStream &>(temp);
-
-        // return ::LoadAudioStream(sampleRate, sampleSize, channels); // Load audio stream (to stream raw audio pcm data)
     }
 
     bool IsAudioStreamReady(AudioStream stream)
@@ -3249,30 +2908,25 @@ namespace rlw
     void SetAudioStreamCallback(AudioStream stream, AudioCallback callback)
     {
         ::SetAudioStreamCallback(reinterpret_cast<::AudioStream &>(stream), reinterpret_cast<::AudioCallback &>(callback)); // Audio thread callback to request new data
-        // ::SetAudioStreamCallback(reinterpret_cast<::AudioStream &>(stream), callback); // Audio thread callback to request new data
     }
 
     void AttachAudioStreamProcessor(AudioStream stream, AudioCallback processor)
     {
         ::AttachAudioStreamProcessor(reinterpret_cast<::AudioStream &>(stream), reinterpret_cast<::AudioCallback &>(processor)); // Attach audio stream processor to stream, receives the samples as <float>s
-        // ::AttachAudioStreamProcessor(reinterpret_cast<::AudioStream &>(stream), processor); // Attach audio stream processor to stream, receives the samples as <float>s
     }
 
     void DetachAudioStreamProcessor(AudioStream stream, AudioCallback processor)
     {
         ::DetachAudioStreamProcessor(reinterpret_cast<::AudioStream &>(stream), reinterpret_cast<::AudioCallback &>(processor)); // Detach audio stream processor from stream
-        // ::DetachAudioStreamProcessor(reinterpret_cast<::AudioStream &>(stream), processor); // Detach audio stream processor from stream
     }
 
     void AttachAudioMixedProcessor(AudioCallback processor)
     {
         ::AttachAudioMixedProcessor(reinterpret_cast<::AudioCallback &>(processor)); // Attach audio stream processor to the entire audio pipeline, receives the samples as <float>s
-        // ::AttachAudioMixedProcessor(processor); // Attach audio stream processor to the entire audio pipeline, receives the samples as <float>s
     }
 
     void DetachAudioMixedProcessor(AudioCallback processor)
     {
-        // ::DetachAudioMixedProcessor(processor); // Detach audio stream processor from the entire audio pipeline
         ::DetachAudioMixedProcessor(reinterpret_cast<::AudioCallback &>(processor)); // Detach audio stream processor from the entire audio pipeline
     }
 

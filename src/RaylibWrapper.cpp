@@ -1,4 +1,4 @@
-#include "../include/RaylibWrapper.hpp"
+#include "RaylibWrapper.hpp"
 #include "raylib.h"
 
 namespace rlw

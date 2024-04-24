@@ -1,25 +1,50 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.10)
 
-project(raylib_wrapper)
+# get source files
+file(GLOB_RECURSE RaylibWrapper_SRC src/*.cpp)
+file(GLOB_RECURSE RaylibWrapper_INC include/RaylibWrapper/*.hpp)
 
+# create the static library target
+add_library(RaylibWrapper STATIC ${RaylibWrapper_SRC} ${RaylibWrapper_INC})
+add_library(RaylibWrapper::RaylibWrapper ALIAS RaylibWrapper)
 
-set(CUSTOM_BUILD_DIR "${CMAKE_SOURCE_DIR}/build/_deps/raylib-wrapper-build")
+# set include directory for build and install
+target_include_directories(RaylibWrapper PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>)
+target_include_directories(RaylibWrapper PUBLIC $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/include>)
+target_include_directories(RaylibWrapper INTERFACE $<INSTALL_INTERFACE:include>)
 
-set(CMAKE_BINARY_DIR "${CUSTOM_BUILD_DIR}")
-set(EXECUTABLE_OUTPUT_PATH "${CUSTOM_BUILD_DIR}")
-set(LIBRARY_OUTPUT_PATH "${CUSTOM_BUILD_DIR}")
-
-set(SOURCES 
-    src/RaylibWrapper.cpp
+# set library target properties
+set_target_properties(RaylibWrapper PROPERTIES
+    CXX_STANDARD 11
+    ARCHIVE_OUTPUT_DIRECTORY lib
+    DEBUG_POSTFIX -d
 )
 
-set(HEADERS 
-    include/RaylibWrapper.hpp
+# cmake install rules
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
+
+# generate RaylibWrapperConfigVersion.cmake
+write_basic_package_version_file(
+    "${PROJECT_BINARY_DIR}/RaylibWrapperConfigVersion.cmake"
+    VERSION ${CMAKE_PROJECT_VERSION}
+    COMPATIBILITY SameMinorVersion
 )
 
-add_library(raylib_wrapper ${SOURCES} ${HEADERS})
+# create regular installation rules
+# install license and readme to ${CMAKE_INSTALL_PREFIX}/share/doc/RaylibWrapper
+install(FILES LICENSE.md README.md DESTINATION ${CMAKE_INSTALL_DOCDIR})
+# install headers to ${CMAKE_INSTALL_PREFIX}/include
+install(DIRECTORY include/RaylibWrapper DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(DIRECTORY ${PROJECT_BINARY_DIR}/include/RaylibWrapper DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+# install pdb files to ${CMAKE_INSTALL_PREFIX}/lib, if they exist
+install(FILES $<TARGET_FILE_DIR:RaylibWrapper>/$<TARGET_FILE_BASE_NAME:RaylibWrapper>.pdb DESTINATION ${CMAKE_INSTALL_LIBDIR} OPTIONAL)
+# install the static library target to ${CMAKE_INSTALL_PREFIX}/lib
+install(TARGETS RaylibWrapper EXPORT RaylibWrapperTargets ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(EXPORT RaylibWrapperTargets DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/RaylibWrapper NAMESPACE RaylibWrapper::)
+# install cmake package files to ${CMAKE_INSTALL_PREFIX}/lib/cmake/RaylibWrapper
+install(FILES ${PROJECT_BINARY_DIR}/RaylibWrapperConfig.cmake DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/RaylibWrapper)
+install(FILES ${PROJECT_BINARY_DIR}/RaylibWrapperConfigVersion.cmake DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/RaylibWrapper)
 
-target_link_libraries(raylib_wrapper PRIVATE raylib)
-
-target_include_directories(raylib_wrapper PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-
+# create build-tree export cmake module
+export(TARGETS RaylibWrapper FILE ${PROJECT_BINARY_DIR}/RaylibWrapper.cmake NAMESPACE RaylibWrapper::)

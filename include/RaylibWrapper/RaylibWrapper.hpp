@@ -1,8 +1,12 @@
+#pragma once
+
+
 // taken from https://www.raylib.com/cheatsheet/cheatsheet.html and modified into a namespace
 
 #ifndef RAYLIB_WRAPPER_H
 #define RAYLIB_WRAPPER_H
 
+#include <RaylibWrapper/export.h>
 #include <stdarg.h>
 
 namespace rlw

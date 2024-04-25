@@ -12,7 +12,7 @@ Disclaimer: This is not `raylib-cpp` in a namespace but rather functional C99 `r
 
 ## Usage
 ```cpp
-#include "RaylibWrapper.hpp"
+#include "RaylibWrapper/RaylibWrapper.hpp"
 
 using namespace rlw;
 
@@ -30,7 +30,7 @@ int main() {
 ### or
 
 ```cpp
-#include "RaylibWrapper.hpp"
+#include "RaylibWrapper/RaylibWrapper.hpp"
 
 int main() {
     rlw::initWindow(800, 600, "game title");

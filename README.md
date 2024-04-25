@@ -48,5 +48,4 @@ int main() {
 This project builds upon the excellent work of the raylib team:
 
 - [Raylib](https://www.raylib.com/) - A simple and easy-to-use library to enjoy videogames programming.
-  - Author: Ray (Raymond Barbiero)
   - License: Zlib/libpng License

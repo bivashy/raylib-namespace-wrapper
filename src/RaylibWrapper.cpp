@@ -767,7 +767,7 @@ namespace rlw
 
     void UnloadAutomationEventList(AutomationEventList *list)
     {
-        ::UnloadAutomationEventList(reinterpret_cast<::AutomationEventList &>(*list)); // Unload automation events list from file
+        ::UnloadAutomationEventList(reinterpret_cast<::AutomationEventList*>(list)); // Unload automation events list from file
     }
 
     bool ExportAutomationEventList(AutomationEventList list, const char *fileName)
@@ -1207,9 +1207,9 @@ namespace rlw
         ::DrawRectangleRounded(reinterpret_cast<::Rectangle &>(rec), roundness, segments, reinterpret_cast<::Color &>(color)); // Draw rectangle with rounded edges
     }
 
-    void DrawRectangleRoundedLines(Rectangle rec, float roundness, int segments, Color color)
+    void DrawRectangleRoundedLines(Rectangle rec, float roundness, float lineThick,int segments, Color color)
     {
-        ::DrawRectangleRoundedLines(reinterpret_cast<::Rectangle &>(rec), roundness, segments, reinterpret_cast<::Color &>(color)); // Draw rectangle with rounded edges outline
+        ::DrawRectangleRoundedLines(reinterpret_cast<::Rectangle &>(rec), roundness, segments, lineThick, reinterpret_cast<::Color &>(color)); // Draw rectangle with rounded edges outline
     }
 
     void DrawTriangle(Vector2 v1, Vector2 v2, Vector2 v3, Color color)
